@@ -1,0 +1,147 @@
+[file name]: public/index.html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Душевные Звонки - Видеообщение с душой</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Экран приветствия -->
+        <div id="welcome-screen" class="screen active">
+            <div class="logo">
+                <div class="logo-icon">❤️</div>
+                <h1>Душевные Звонки</h1>
+            </div>
+            <p class="subtitle">Видеообщение с русской душой</p>
+            
+            <div class="action-buttons">
+                <button id="create-call-btn" class="btn btn-primary">
+                    <i class="fas fa-heart"></i>Создать душевный звонок
+                </button>
+                <div class="separator">или</div>
+                <div class="join-container">
+                    <input type="text" id="room-id-input" placeholder="Введите код комнаты" maxlength="8">
+                    <button id="join-call-btn" class="btn btn-secondary">
+                        <i class="fas fa-door-open"></i>Присоединиться
+                    </button>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-shield-heart"></i>
+                    <span>Защищённое общение</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <span>Быстро как молния</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span>Только вы и собеседник</span>
+                </div>
+            </div>
+
+            <div class="russian-touch">
+                <div class="matryoshka">🎪</div>
+                <div class="samovar">🫖</div>
+                <div class="balalaika">🎻</div>
+            </div>
+        </div>
+
+        <!-- Экран звонка -->
+        <div id="call-screen" class="screen">
+            <div class="call-header">
+                <div class="room-info">
+                    <span>Комната: </span>
+                    <span id="current-room-id" class="room-code">-----</span>
+                </div>
+                <div class="header-buttons">
+                    <button id="copy-room-id" class="btn btn-small" title="Скопировать код">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button id="share-room" class="btn btn-small" title="Поделиться">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video id="local-video" muted autoplay playsinline></video>
+                    <div class="video-overlay">Ваше окошко</div>
+                    <div class="video-status">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="video-wrapper">
+                    <video id="remote-video" autoplay playsinline></video>
+                    <div class="video-overlay">Собеседник</div>
+                    <div id="remote-loading" class="loading">
+                        <div class="loading-spinner"></div>
+                        <span>Ждём гостя...</span>
+                    </div>
+                    <div class="connection-quality">
+                        <i class="fas fa-signal"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-controls">
+                <button id="mute-audio" class="control-btn" title="Микрофон">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="mute-video" class="control-btn" title="Камера">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button id="end-call" class="control-btn end-call" title="Завершить">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+                <button id="switch-camera" class="control-btn" title="Переключить камеру">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <button id="fullscreen" class="control-btn" title="Во весь экран">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+
+            <div class="connection-status">
+                <i class="fas fa-circle" id="status-indicator"></i>
+                <span id="status-text">Настраиваем связь...</span>
+            </div>
+
+            <div class="russian-charm">
+                <div class="charm-item">☕</div>
+                <div class="charm-item">🥖</div>
+                <div class="charm-item">🐻</div>
+            </div>
+        </div>
+
+        <!-- Уведомления -->
+        <div id="notification" class="notification">
+            <div class="notification-content">
+                <i class="fas fa-info-circle"></i>
+                <span id="notification-text"></span>
+            </div>
+        </div>
+
+        <!-- Модальное окно -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h3 id="modal-title"></h3>
+                <p id="modal-message"></p>
+                <button id="modal-close" class="btn btn-primary">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
